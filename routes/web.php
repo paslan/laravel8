@@ -23,6 +23,17 @@ Route::get('/empresa', function(){
     return 'Sobre a Empresa';
 });
 
+//Route::get('/teste', 'Admin\TestController@teste');
+
+
+//Route::get('register', 'App\Http\Controllers\Api\RegisterController@register');
+
+// sintaxe ação. 
+use App\Http\Controllers\Admin\TestController;
+ 
+Route::get('teste', [TestController::class, 'teste']);
+
+Route::get('grava', [TestController::class, 'grava']);
 
 
 
