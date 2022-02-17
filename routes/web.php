@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+Route::get('/contato', function(){
+    return view('sites.contact');
+});
+
+Route::get('/empresa', function(){
+    return 'Sobre a Empresa';
+});
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
