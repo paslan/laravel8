@@ -7,11 +7,30 @@
     <h1>Exibindo os Produtos</h1>
 
 
+
+    <a href="{{ route('products.create') }}">Cadastrar</a>
+
+    <hr>
+
+
+    @component('admin.components.cards')
+    @slot('title')
+        <h1>Título Card</h1>
+    @endslot
+        Um card de exemplo
+        
+    @endcomponent
+
+    <hr>
+
+    @include('admin.includes.alerts', ['content' => 'Alerta de preços de produtos'])
+    
+
     @if(@isset($products))
 
         @foreach ($products as $product)
             
-            <p>{{$product}}</p>
+            <p class="@if($loop->last) last @endif">{{$product}}</p>
 
         @endforeach
     @endif
@@ -20,7 +39,7 @@
 
 @forelse ($products as $product)
     
-    <p>{{$product}}</p>
+    <p class="@if($loop->first) last @endif">{{$product}}</p>
 
 @empty
     <p>Não existem produtos cadastrados</p>
@@ -89,3 +108,7 @@
 
     @endsection
 
+
+    <style>
+        .last {background: rgb(243, 5, 5)}
+    </style>
