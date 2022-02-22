@@ -7,7 +7,7 @@
 <div class="container">
     <h1>Editando Produto - {{$product->id}} </h1>
 
-    <form action="{{ route('products.update', $product->id) }}" class="form" method="post">
+    <form action="{{ route('products.update', $product->id) }}" class="form" method="post" enctype="multipart/form-data">
 
         @method('PUT')
         @include('admin.pages.products.partials.form')

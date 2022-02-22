@@ -19,6 +19,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Imagem</th>
                     <th>Nome</th>
                     <th>Preço</th>
                     <th>Ações</th>
@@ -31,9 +32,16 @@
                     @method('DELETE')
                 </form>
                 <tr>
-                    <td>{{ $product->name }}</td>
-                    <td>{{ $product->price }}</td>
-                    <td>
+                    <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        @if ($product->image)
+                            <img src="{{ url("storage/{$product->image}") }}" class="img-fluid" alt="{{ $product->name }}" width="15%">
+                        @else
+                            <img src="{{ url("storage/images/no-image-icon.png") }}" class="img-fluid" alt="" width="15%">                            
+                        @endif
+                    </td>
+                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">{{ $product->name }}</td>
+                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">{{ $product->price }}</td>
+                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                         <a class="btn btn-outline-info" href="{{ route('products.show', $product->id) }}" class="btn btn-secondary">Detalhe</a>
                         <a class="btn btn-outline-success" href="{{ route('products.edit', $product->id) }}" class="btn btn-success">Editar</a>
                         <button form="formdelete" type="submit" class="btn btn-outline-danger">Excluir</button>
@@ -51,5 +59,6 @@
         @endif
         
     </div>
+
 @endsection
 
