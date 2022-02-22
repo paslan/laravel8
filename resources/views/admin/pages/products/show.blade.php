@@ -11,8 +11,9 @@
             <li><strong>Nome</strong> {{ $product->name }}</li>
             <li><strong>Preço</strong> {{ $product->price }}</li>
             <li><strong>Descrição</strong> {{ $product->description }}</li>
+            <li><strong>Imagem</strong> {{ $product->image }}</li>
         </ul>
-    <a href="{{ route('products.index') }}"class="btn btn-primary" >Voltar</a>
+        <a href="{{ route('products.index') }}"class="btn btn-outline-primary" >Voltar</a>
     </div>
 
 

@@ -1,7 +1,9 @@
-<div class="alert">
-    <p>Alert - {{$content ?? 'Valor default'}}</p>
-
-    {{-- Texto comentado no Blade --}}
-
-
-</div>
+@if ($errors->any())
+<ul>
+    @foreach ($errors->all() as $error)
+        <li>
+            {{ $error }}
+        </li>
+    @endforeach
+</ul>
+@endif

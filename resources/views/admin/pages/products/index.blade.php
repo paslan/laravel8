@@ -8,7 +8,7 @@
 
         <h1>Exibindo os Produtos</h1>
 
-        <a href="{{ route('products.create') }}" class="btn btn-primary">Cadastrar</a>
+        <a href="{{ route('products.create') }}" class="btn btn-outline-info">Cadastrar</a>
 
         <table class="table table-striped">
             <thead>
@@ -20,11 +20,17 @@
             </thead>
             <tbody>
                 @foreach ($products as $product)
+                <form action="{{ route('products.destroy', $product->id) }}" id="formdelete" method="POST">
+                    @csrf
+                    @method('DELETE')
+                </form>
                 <tr>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>
-                        <a href="{{ route('products.show', $product->id) }}">Detalhes</a>
+                        <a class="btn btn-outline-info" href="{{ route('products.show', $product->id) }}" class="btn btn-secondary">Detalhe</a>
+                        <a class="btn btn-outline-success" href="{{ route('products.edit', $product->id) }}" class="btn btn-success">Editar</a>
+                        <button form="formdelete" type="submit" class="btn btn-outline-danger">Excluir</button>
                     </td>
                 </tr>
                 @endforeach
@@ -34,3 +40,4 @@
         {{ $products->links() }}
     </div>
 @endsection
+

@@ -74,12 +74,19 @@ class ProductController extends Controller
      */
     public function store(StoreUpdateProductRequest $request)
     {
-        dd('ok');
-        // $request->validate([
-        //     'name' => 'required|min:5|max:30',
-        //     'description' => 'nullable|min:5|max:150',
-        //     'photo' => 'required|image',
-        // ]);
+
+
+        $data = $request->only('name', 'description', 'price');
+        Product::create($data);
+        return redirect()->route('products.index');
+
+
+        //  $request->validate([
+        //      'name' => 'required|min:5|max:30',
+        //      'description' => 'required|min:5|max:150',
+        //      'price' => 'required',
+        //      'photo' => 'required|image',
+        //  ]);
         // dd('OK');
         //dd($request->all());
         //dd($request->only('name', 'description'));
@@ -88,12 +95,12 @@ class ProductController extends Controller
         //dd($request->input('teste', 'default'));
         //dd($request->except('_token', 'name'));
         //dd($request->file('photo')->isValid());
-        if($request->file('photo')->isValid()){
-            //dd($request->photo->extension());
-            //dd($request->photo->store('products'));
-            $namefile = $request->name . '.' . $request->photo->extension();
-            dd($request->photo->storeAs('products', $namefile));
-        }
+        // if($request->file('photo')->isValid()){
+        //     //dd($request->photo->extension());
+        //     //dd($request->photo->store('products'));
+        //     $namefile = $request->name . '.' . $request->photo->extension();
+        //     dd($request->photo->storeAs('products', $namefile));
+        // }
 
     }
 
@@ -126,20 +133,35 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.pages.products.edit', compact('id'));
+        $product = Product::find($id);
+
+        if (!$product){
+            return redirect()->back();
+        }
+
+        return view('admin.pages.products.edit', [
+            'product' => $product,
+        ]);
 
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreUpdateProductRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateProductRequest $request, $id)
     {
-        dd("Editando o Produto $id");
+        $product = Product::find($id);
+
+        if (!$product){
+            return redirect()->back();
+        }
+        $product->update(request()->all());
+        return redirect()->route('products.index');
+
     }
 
     /**
@@ -150,6 +172,13 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+
+        if (!$product){
+            return redirect()->back();
+        }
+
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }
