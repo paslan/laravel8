@@ -10,6 +10,12 @@
 
         <a href="{{ route('products.create') }}" class="btn btn-outline-info">Cadastrar</a>
 
+        <form action="{{ route('products.search') }}" method="POST" class="form form-inline">
+            @csrf
+            <input type="text" name="filter" placeholder="filtrar" class="form_control" value="{{ $filters['filter'] ?? ''}}">
+            <button type="submit" class="btn btn-outline-info">Pesquisar</button>
+        </form>
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -37,7 +43,13 @@
             </tbody>
         </table>
 
-        {{ $products->links() }}
+
+        @if (isset($filters))
+            {{ $products->appends($filters)->links() }}    
+        @else
+            {{ $products->links() }}            
+        @endif
+        
     </div>
 @endsection
 

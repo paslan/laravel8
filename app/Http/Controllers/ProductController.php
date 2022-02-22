@@ -181,4 +181,16 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.index');
     }
+
+    public function search(Request $request)
+    {
+        $filter = $request->except('_token');
+        $products = Product::search($request->filter);
+
+        return view('admin.pages.products.index',[
+            'products' => $products,
+            'filters' => $filter,
+        ]);
+
+    }
 }
