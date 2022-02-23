@@ -28,9 +28,11 @@ Route::get('/empresa', function(){
 
 //Route::get('register', 'App\Http\Controllers\Api\RegisterController@register');
 
+Route::get('products/{id}/zoom', 'App\Http\Controllers\ProductController@zoom')->name('products.zoom');
+
 Route::any('products/search', 'App\Http\Controllers\ProductController@search')->name('products.search');
 
- Route::resource('products', 'App\Http\Controllers\ProductController'); //->middleware(['auth']);
+Route::resource('products', 'App\Http\Controllers\ProductController'); //->middleware(['auth']);
 
 
 Route::get('login', function(){

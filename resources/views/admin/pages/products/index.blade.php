@@ -34,7 +34,9 @@
                 <tr>
                     <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                         @if ($product->image)
-                            <img src="{{ url("storage/{$product->image}") }}" class="img-fluid" alt="{{ $product->name }}" width="15%">
+                            <a href="{{ route('products.zoom', $product->id) }}">
+                                <img src="{{ url("storage/{$product->image}") }}" class="img-fluid" alt="{{ $product->name }}" width="15%">
+                            </a>
                         @else
                             <img src="{{ url("storage/images/no-image-icon.png") }}" class="img-fluid" alt="" width="15%">                            
                         @endif
@@ -47,6 +49,7 @@
                         <button form="formdelete" type="submit" class="btn btn-outline-danger">Excluir</button>
                     </td>
                 </tr>
+
                 @endforeach
             </tbody>
         </table>
