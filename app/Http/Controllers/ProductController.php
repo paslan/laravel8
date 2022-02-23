@@ -227,6 +227,7 @@ class ProductController extends Controller
 
      public function zoom($id)
      {
+         dd('Zoom....');
         $product = Product::find($id);
 
         if (!$product){
