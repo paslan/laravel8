@@ -238,4 +238,6 @@ class ProductController extends Controller
             'product' => $product,
         ]);
     }
+
+
 }

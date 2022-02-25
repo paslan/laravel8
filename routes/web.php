@@ -28,6 +28,9 @@ Route::get('/empresa', function(){
 
 //Route::get('register', 'App\Http\Controllers\Api\RegisterController@register');
 
+Route::get('bling', 'App\Http\Controllers\BlingController@show')->name('bling.show');
+
+
 Route::get('products/{id}/zoom', 'App\Http\Controllers\ProductController@zoom')->name('products.zoom');
 
 Route::any('products/search', 'App\Http\Controllers\ProductController@search')->name('products.search');
