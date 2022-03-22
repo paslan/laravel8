@@ -2,6 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+use App\Models\User;
+use App\Services\GitHub;
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +35,10 @@ Route::get('/empresa', function(){
 
 //Route::get('register', 'App\Http\Controllers\Api\RegisterController@register');
 
-Route::get('bling', 'App\Http\Controllers\BlingController@show')->name('bling.show');
+Route::get('teste/{id}', 'App\Http\Controllers\TesteController@go')->name('teste.go');
+
+
+Route::get('bling/{page}', 'App\Http\Controllers\BlingController@show')->name('bling.show');
 
 
 Route::get('products/{id}/zoom', 'App\Http\Controllers\ProductController@zoom')->name('products.zoom');
@@ -36,6 +46,41 @@ Route::get('products/{id}/zoom', 'App\Http\Controllers\ProductController@zoom')-
 Route::any('products/search', 'App\Http\Controllers\ProductController@search')->name('products.search');
 
 Route::resource('products', 'App\Http\Controllers\ProductController'); //->middleware(['auth']);
+
+Route::get('/user/{user}', function (User $user) {
+    return $user;
+});
+
+
+
+Route::get('teste', function(){
+    return response()->json([
+        'name' => 'Abigail',
+        'state' => 'CA',
+    ]);
+});
+
+Route::get('teste2', function(User $user){
+    $user = User::find(10);
+    return view('teste', ['name' => $user->name]);
+});
+
+Route::get('teste3', function(){
+    //$users = DB::select('select * from users');
+    $users = DB::table('users')->get();
+ 
+ 
+    foreach ($users as $user) {
+        echo $user->id . ' - '.$user->name . '<br>';
+    }
+});
+
+
+Route::get('teste4', function () {
+    return User::paginate();
+});
+
+
 
 
 Route::get('login', function(){
